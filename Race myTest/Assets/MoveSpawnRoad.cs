@@ -12,7 +12,7 @@ public class MoveSpawnRoad : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var vSpeedAdd = PlayerMoves.vspeed;
+        var vSpeedAdd = PlayerMovesOuter.vspeed;
         
         transform.Translate(Vector3.down * speed * Time.deltaTime * vSpeedAdd);
         if (transform.position.y < -8)

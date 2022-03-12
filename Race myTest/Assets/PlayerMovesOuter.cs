@@ -1,12 +1,10 @@
 using UnityEngine;
 
-public class PlayerMoves : MonoBehaviour
+public class PlayerMovesOuter : MonoBehaviour
 {
-    public AudioSource HitSound123;
-    public AudioSource HitSound234;
+    public float speed = 3f;
+    public static float vspeed = 1f;
 
-    public Animator anim;
-    
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("enemies"))
@@ -39,22 +37,23 @@ public class PlayerMoves : MonoBehaviour
 
         // !!!! IF PUBLISHED TO ANDROID, MIND Y VELOCITY - NO <UP> ARROW THERE!!
 
-    }
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("enemies"))
+        float ver = Input.GetAxisRaw("Vertical");
+        float hor = Input.GetAxisRaw("Horizontal");
+        if (hor > 0) hor = 1;
+        if (hor < 0) hor = -1;
+        if (ver > 0)
         {
-            if (Random.Range(0, 14) == 1)
-            {
-                HitSound123.Play();
-            }
-            else
-            {
-                HitSound234.Play();
-            }
-            anim.SetTrigger("CarHit");
-            Debug.Log("...CARHIT!!!...");
-            //Destroy(gameObject);
+            vspeed = 1.5f;
         }
+        else if (ver < 0)
+        {
+            vspeed = 0.5f;
+        }
+        else
+        {
+            vspeed = 1f;
+        }
+        Vector3 dir = new Vector3(hor, 0, ver / 2); //было hor.normalized, это и есть +/-1 - говно, чё.
+        transform.Translate(dir * Time.deltaTime * speed);
     }
 }

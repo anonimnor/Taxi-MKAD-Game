@@ -23,7 +23,7 @@ public class SpawnCars : MonoBehaviour
                     Quaternion.Euler(new Vector3(90, 0, -180))
                 );
             }
-            yield return new WaitForSeconds(0.4f);
+            yield return new WaitForSeconds(0.7f);
         }
     }
 

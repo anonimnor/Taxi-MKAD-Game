@@ -14,7 +14,7 @@ public class MoveObjects : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var vSpeedAdd = PlayerMoves.vspeed;
+        var vSpeedAdd = PlayerMovesOuter.vspeed;
         transform.Translate(Vector3.forward * mySpeed * Time.deltaTime * vSpeedAdd);
         if (transform.position.y<-6.5) {
             Destroy(gameObject);
